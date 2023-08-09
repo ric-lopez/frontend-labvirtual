@@ -1,6 +1,7 @@
 # Importing flask module in the project is mandatory
 # An object of Flask class is our WSGI application.
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+import serial, time
  
 # Flask constructor takes the name of
 # current module (__name__) as argument.
@@ -45,6 +46,33 @@ def campo_gravitatorio():
 @app.route('/otros')
 def experimento5():
     return render_template('experimento4.html')
+    
+@app.route('/get_polarizacion', methods =["GET", "POST"])
+def getAngulo():
+    if request.method == "POST":
+        rotacion = request.form.get("rotacion")
+        print("Los grados son "+rotacion)
+        print('Running. Press CTRL-C to exit.')
+        with serial.Serial("/dev/ttyACM0", 9600, timeout=1) as arduino:
+            time.sleep(0.1) #wait for serial to open
+            if arduino.isOpen():
+                print("{} connected!".format(arduino.port))
+                try:
+                    while True:
+                        #cmd=input("Enter command : ")
+                        arduino.write(rotacion.encode())
+                        #time.sleep(0.1) #wait for arduino to answer
+                        while arduino.inWaiting()==0: pass
+                        if  arduino.inWaiting()>0: 
+                            answer=arduino.readline()
+                            print(answer)
+                            arduino.flushInput() #remove data after reading
+                except KeyboardInterrupt:
+                    print("KeyboardInterrupt has been caught.")
+        #return "Los grados son "+rotacion
+        return redirect(url_for("/polarizacion"))
+    return render_template("index.html")
+
 
 # main driver function
 if __name__ == '__main__':

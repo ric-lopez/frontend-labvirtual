@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Laboratorio Virtual</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
+      
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -29,14 +29,6 @@
           </div>
         </div>
     </nav>
-      <!-- <ul class="nav nav-tabs justify-content-center">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Difracción de Young</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/polarizacion">Polarización</a>
-        </li>
-      </ul> -->
     <div class="row">
       <div class="col-sm-2 py-3">
         <div class="px-5">
@@ -46,36 +38,6 @@
           <a class="nav-link active" aria-current="page" href="#">Difracción de Young</a>
           <a class="nav-link" href="/polarizacion">Polarización de la luz</a>
         </nav>
-        <!-- <div class="d-flex align-items-start">
-          <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-            <button class="nav-link active"
-              id="v-pills-home-tab"
-              data-bs-toggle="pill"
-              data-bs-target="#v-pills-home"
-              type="button"
-              role="tab"
-              aria-controls="v-pills-home"
-              aria-selected="true">
-                Difracción de Young
-            </button>
-            <button class="nav-link"
-              id="v-pills-profile-tab"
-              data-bs-toggle="pill"
-              data-bs-target="#v-pills-profile"
-              type="button"
-              role="tab"
-              aria-controls="v-pills-profile"
-              aria-selected="false">
-                Polarización
-            </button>
-          </div> -->
-          <!-- <div class="tab-content" id="v-pills-tabContent">
-            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">...</div>
-            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
-            <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
-            <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
-          </div> -->
-        <!-- </div> -->
       </div>
       <div class="col-sm-8">
         <div class="container pt-4">
@@ -85,14 +47,14 @@
         <div class="row">
           <div class="col-sm">
             Sistema de rotación
-            <form>
+            <form action="/inst_young" method="POST">
               <div class="form-group">
                 <div class="row">
                   <div class="col-sm-12">
                     <label for="rotacion">Rotación</label>
                   </div>
                   <div class="col-sm-10">
-                    <input type="number" class="form-control" id="rotacion" aria-describedby="angulo de rotación" placeholder="Ángulo de rotación">
+                    <input type="number" class="form-control" id="rotacion" name='rotacion' aria-describedby="angulo de rotación" placeholder="Ángulo de rotación">
                   </div>
                   <div class="col-sm-1">
                     <h6>[°]</h6>
@@ -105,21 +67,21 @@
             <div class="d-flex justify-content-center">
               <div class="row">
                 <div class="col-sm-6 d-flex justify-content-center">
-                  <button type="button" class="btn btn-light">
+                  <button type="button" onclick="sendInstYoung(young, 'HH')" class="btn btn-light">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
                       <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
                     </svg>
                   </button>
                 </div>
                 <div class="col-sm-6 d-flex justify-content-center">
-                  <button type="button" class="btn btn-light">
+                  <button type="button" onclick="sendInstYoung(young, 'FF')" class="btn btn-light">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
                       <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
                     </svg>
                   </button>
                 </div>
                 <div class="col-sm-12 d-flex justify-content-center">
-                  <button type="button" class="btn btn-primary">Detener</button>
+                  <button type="button" onclick="sendInstYoung('MG stop')" class="btn btn-primary">Detener</button>
                 </div>
               </div>
               <br>
@@ -127,14 +89,14 @@
           </div>
           <div class="col-sm">
             Sistema de desplazamiento principal
-            <form>
+            <form action="/inst_young" method="POST">
               <div class="form-group">
                 <div class="row">
                   <div class="col-sm-12">
                     <label for="rotacion">Desplazamiento</label>
                   </div>
                   <div class="col-sm-10">
-                    <input type="number" class="form-control" id="rotacion" aria-describedby="Desplazamiento" placeholder="Desplazamiento en centimetros">
+                    <input type="number" class="form-control" id="desp_principal" name='desp_principal' aria-describedby="Desplazamiento" placeholder="Desplazamiento en centimetros">
                   </div>
                   <div class="col-sm-1">
                     <h6>[cm]</h6>
@@ -147,14 +109,14 @@
             <div class="d-flex justify-content-center">
               <div class="row">
                 <div class="col-sm-6 d-flex justify-content-center">
-                  <button type="button" class="btn btn-light">
+                  <button type="button" class="btn btn-light" onclick="sendInstYoung(young, 'EE')">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
                       <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
                     </svg>
                   </button>
                 </div>
                 <div class="col-sm-6 d-flex justify-content-center">
-                  <button type="button" class="btn btn-light">
+                  <button type="button" class="btn btn-light" onclick="sendInstYoung(young, 'DD')">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
                       <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
                     </svg>
@@ -169,14 +131,14 @@
           </div>
           <div class="col-sm">
             Sistema de desplazamiento secundario
-            <form>
+            <form action="/inst_young" method="POST">
               <div class="form-group">
                 <div class="row">
                   <div class="col-sm-12">
                     <label for="rotacion">Desplazamiento</label>
                   </div>
                   <div class="col-sm-10">
-                    <input type="number" class="form-control" id="rotacion" aria-describedby="Desplazamiento" placeholder="Desplazamiento en centimetros">
+                    <input type="number" class="form-control" id="desp_secundario" name='desp_secundario' aria-describedby="Desplazamiento" placeholder="Desplazamiento en centimetros">
                   </div>
                   <div class="col-sm-1">
                     <h6>[cm]</h6>
@@ -189,14 +151,14 @@
             <div class="d-flex justify-content-center">
               <div class="row">
                 <div class="col-sm-6 d-flex justify-content-center">
-                  <button type="button" class="btn btn-light">
+                  <button type="button" class="btn btn-light" onclick="sendInstYoung(young, 'CC')">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
                       <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
                     </svg>
                   </button>
                 </div>
                 <div class="col-sm-6 d-flex justify-content-center">
-                  <button type="button" class="btn btn-light">
+                  <button type="button" class="btn btn-light" onclick="sendInstYoung(young, 'AA')">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
                       <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
                     </svg>
@@ -224,7 +186,7 @@
         <div class="col-sm">
           <p>Transmisión de video</p>
           <div class="embed-responsive embed-responsive-4by3">
-            <iframe class="embed-responsive-item" src="/static/img/optica/optica_1.jpg"></iframe>
+            <img class="embed-responsive-item" src="{{ url_for('video_feed') }}">
           </div>
         </div>
         <div class="col-sm">
@@ -235,7 +197,7 @@
               </p>
             </div>
             <div class="col-sm-12 d-flex justify-content-center">
-              <button type="button" class="btn btn-primary">Guardar imagen</button>
+              <button type="button" onclick="takePicture()" class="btn btn-primary">Guardar imagen</button>
             </div>
           </div>
           <br>
@@ -245,8 +207,8 @@
       <!-- </div> -->
 
 
-
-   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="./static/js/actions.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
