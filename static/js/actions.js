@@ -173,7 +173,7 @@ function sendInstTensionSup(id_exp, instruccion, value){
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({id_exp: id_exp, instruccion: "LA"}),
+		body: JSON.stringify({id_exp: id_exp, instruccion: instruccion}),
 	})
 	.then(response => response.text())
 	.then(result => {
