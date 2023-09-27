@@ -19,10 +19,10 @@ def send_msg(exp_id, msg):
     elif(exp_id == '03'):
         UDP_IP = "10.51.82.101"
     elif(exp_id == '06'):
-        UDP_IP = "10..51.82.102"
+        UDP_IP = "10.51.82.102"
     UDP_PORT = 3333
 
-    MESSAGE = bytes(msg, "utf-8")
+    MESSAGE = bytes(exp_id+msg, "utf-8")
     print("UDP target IP: %s" % UDP_IP)
     print("UDP target port: %s" % UDP_PORT)
     print("message: %s" % MESSAGE)
